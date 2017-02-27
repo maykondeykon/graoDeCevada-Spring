@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Cadastro de cerveja</title>
+    <link rel="icon" th:href="@{/img/beer.png}"/>
+    <link th:href="@{/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link th:href="@{/bootstrap-3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/style_v2.css}"/>
+</head>
+
+<body>
+
+    <div class="container-fluid topo">
+        <img th:src="@{/img/logo.png}" class="img-responsive" alt=""/>
+    </div>
+
+    <nav class="container navbar navbar-default" data-spy="affix" data-offset-top="197">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <a href="/v2/" class="navbar-brand">
+                    <img th:src="@{/img/brand.png}" alt=""/>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+                <ul class="nav navbar-nav">
+                    <li><a href="cadBebida.html"><i class="fa fa-beer" aria-hidden="true"></i> Cadastro de Cerveja</a></li>
+                    <li><a href="contato.html"><i class="fa fa-envelope" aria-hidden="true"></i> Contato</a></li>
+                    <li><a href="ranking.html"><i class="fa fa-trophy" aria-hidden="true"></i> Ranking</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container" layout:fragment="conteudo">
+
+    </main>
+    <footer>
+        <p class="container"><a href="http://maykondeykon.github.io/">&copy; Maykon Deykon</a></p>
+    </footer>
+</body>
+<script th:src="@{/js/jquery-min.js}" charset="utf-8"></script>
+<script th:src="@{/js/tether.min.js}" charset="utf-8"></script>
+<script th:src="@{/bootstrap-3.3.7/js/bootstrap.min.js}" charset="utf-8"></script>
+<script th:src="@{/js/scripts.js}" charset="utf-8"></script>
+
+</html>

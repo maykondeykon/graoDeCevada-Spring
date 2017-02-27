@@ -1,0 +1,121 @@
+@font-face {
+    font-family: "Dosis";
+    src: url("../fonts/Dosis-Regular.otf");
+}
+
+body {
+    font-family: 'Dosis', sans-serif;
+}
+
+nav {
+    z-index: 2;
+}
+
+.navbar-brand {
+    padding: 7px 2px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #3a1f02;
+}
+
+ul.nav a:hover {
+    border-bottom: 2px solid #e5a42f;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.affix-top {
+    position: static;
+    top: -35px;
+}
+
+.affix+.container-fluid {
+    padding-top: 70px;
+}
+
+.topo {
+    background-color: #3a1f02;
+    border-bottom: .4rem solid #cb6908;
+    padding: 1.5em 0 1.5em 0;
+}
+
+.topo img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pageTitle {
+    color: #3a1f02;
+    padding-bottom: 1em;
+}
+
+form {
+    padding-bottom: 1em;
+}
+
+form label:first-of-type {
+    color: maroon;
+}
+
+.media-body {
+    vertical-align: middle;
+}
+
+.media-list li {
+    background-color: #f7dc49;
+    border: 1px solid #f7dc49;
+    padding: 0.5em;
+    box-shadow: 4px 4px 5px #888888;
+}
+
+.thumbnail {
+    margin-bottom: 0;
+}
+
+.figureRanking {
+    height: 10em;
+}
+
+.rankingNumber {
+    font-size: 3em;
+    color: #fff;
+    font-weight: lighter;
+    text-shadow: 2px 2px 4px #000000;
+    position: absolute;
+    padding-left: 0.1em;
+}
+
+.noResize {
+    resize: none;
+}
+
+.btnLar {
+    background-color: #cb6908;
+    color: #fff;
+}
+
+footer {
+    background-image: url("../img/4.png");
+    color: #fff;
+    padding: 1.5em 0 1.5em 1em;
+    font-family: inherit;
+    position: absolute;
+    width: 100%;
+}
+
+footer a {
+    color: #fff;
+}
+
+footer a:hover, a:focus {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px #000000;
+}
