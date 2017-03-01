@@ -1,9 +1,11 @@
 package com.mkdk.graoDeCevada.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -19,30 +21,39 @@ public class Cerveja {
 	private String marca;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Categoria categoria;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Embalagem embalagem;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Fermentacao fermentacao;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Litragem litragem;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Nacionalidade nacionalidade;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Pais paisOrigem;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Sabor sabor;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private TipoCerveja tipo;
 
 	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
 	private FaixaPreco faixaPreco;
 
 	@Override
