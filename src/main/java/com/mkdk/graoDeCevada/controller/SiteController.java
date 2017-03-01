@@ -10,9 +10,23 @@ import org.springframework.web.servlet.ModelAndView;
 public class SiteController {
 
 	@GetMapping("/")
-	public ModelAndView index(){
+	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("site/index");
+
+		return mv;
+	}
+
+	@GetMapping("/contato")
+	public ModelAndView contato() {
+		ModelAndView mv = new ModelAndView("site/contato");
 		
+		return mv;
+	}
+	
+	@GetMapping("/ranking")
+	public ModelAndView ranking() {
+		ModelAndView mv = new ModelAndView("site/ranking");
+
 		return mv;
 	}
 }

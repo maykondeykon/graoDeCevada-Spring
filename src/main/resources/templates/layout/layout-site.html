@@ -23,15 +23,15 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                <a href="/v2/" class="navbar-brand">
+                <a th:href="@{/}" class="navbar-brand">
                     <img th:src="@{/img/brand.png}" alt=""/>
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
                 <ul class="nav navbar-nav">
-                    <li><a href="cadBebida.html"><i class="fa fa-beer" aria-hidden="true"></i> Cadastro de Cerveja</a></li>
-                    <li><a href="contato.html"><i class="fa fa-envelope" aria-hidden="true"></i> Contato</a></li>
-                    <li><a href="ranking.html"><i class="fa fa-trophy" aria-hidden="true"></i> Ranking</a></li>
+                    <li><a th:href="@{/cerveja/novo}"><i class="fa fa-beer" aria-hidden="true"></i> Cadastro de Cerveja</a></li>
+                    <li><a th:href="@{/contato}"><i class="fa fa-envelope" aria-hidden="true"></i> Contato</a></li>
+                    <li><a th:href="@{/ranking}"><i class="fa fa-trophy" aria-hidden="true"></i> Ranking</a></li>
                 </ul>
             </div>
         </div>
