@@ -56,6 +56,94 @@ public class Cerveja {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private FaixaPreco faixaPreco;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Embalagem getEmbalagem() {
+		return embalagem;
+	}
+
+	public void setEmbalagem(Embalagem embalagem) {
+		this.embalagem = embalagem;
+	}
+
+	public Fermentacao getFermentacao() {
+		return fermentacao;
+	}
+
+	public void setFermentacao(Fermentacao fermentacao) {
+		this.fermentacao = fermentacao;
+	}
+
+	public Litragem getLitragem() {
+		return litragem;
+	}
+
+	public void setLitragem(Litragem litragem) {
+		this.litragem = litragem;
+	}
+
+	public Nacionalidade getNacionalidade() {
+		return nacionalidade;
+	}
+
+	public void setNacionalidade(Nacionalidade nacionalidade) {
+		this.nacionalidade = nacionalidade;
+	}
+
+	public Pais getPaisOrigem() {
+		return paisOrigem;
+	}
+
+	public void setPaisOrigem(Pais paisOrigem) {
+		this.paisOrigem = paisOrigem;
+	}
+
+	public Sabor getSabor() {
+		return sabor;
+	}
+
+	public void setSabor(Sabor sabor) {
+		this.sabor = sabor;
+	}
+
+	public TipoCerveja getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoCerveja tipo) {
+		this.tipo = tipo;
+	}
+
+	public FaixaPreco getFaixaPreco() {
+		return faixaPreco;
+	}
+
+	public void setFaixaPreco(FaixaPreco faixaPreco) {
+		this.faixaPreco = faixaPreco;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

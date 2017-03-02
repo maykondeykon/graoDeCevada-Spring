@@ -13,111 +13,114 @@
 		<i class="fa fa-beer" aria-hidden="true"></i> Cadastro de cerveja
 	</h3>
 
-	<form class="" action="" method="post">
-		<div class="form-group">
-			<label for="marca">Marca</label> <input type="text"
-				class="form-control" id="marca" placeholder="Marca" required
-				autofocus>
+	<form class="" action="" method="post" th:action="@{/cerveja/novo}" th:object="${cerveja}">
+
+		<div class="alert  alert-danger  alert-dismissible" role="alert"
+			th:if="${#fields.hasAnyErrors()}">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<th:block th:each="error: ${#fields.detailedErrors()}">
+				<div>
+					<i class="fa  fa-exclamation-circle"></i> <span
+						th:text="${error.message}"></span>
+				</div>
+			</th:block>
+
 		</div>
 
-		<label>Categoria da cerveja: </label> <label class="radio-inline">
-			<input type="radio" name="categoria" id="categoria1" value="premium">
-			Premium
-		</label> <label class="radio-inline"> <input type="radio"
-			name="categoria" id="categoria2" value="especiais"> Especiais
-		</label>
+		<div class="alert  alert-success"
+			th:if="${!#strings.isEmpty(mensagem)}">
+			<i class="fa  fa-exclamation-circle"></i> <span th:text="${mensagem}"></span>
+		</div>
+		
+		<input type="hidden" th:field="*{id}">
+		
+		<div class="form-group">
+			<label for="marca">Marca</label> <input type="text"
+				th:field="*{marca}" class="form-control" id="marca"
+				placeholder="Marca" required autofocus>
+		</div>
+
+		<div class="form-group">
+			<label for="embalagem">Categoria da cerveja</label> <select class="form-control"
+				th:field="*{categoria}" required>
+				<option value="">Selecione</option>
+				<option th:each="categoria : ${categoriaList}"
+					th:value="${categoria.id}" th:text="${categoria.descricao}"></option>
+			</select>
+		</div>
 
 		<div class="form-group">
 			<label for="embalagem">Embalagem</label> <select class="form-control"
-				required>
+				th:field="*{embalagem}" required>
 				<option value="">Selecione</option>
-				<option value="1">Lata</option>
-				<option value="2">Litrão</option>
-				<option value="3">Litrinho</option>
-				<option value="4">Long neck</option>
-				<option value="5">Garrafas</option>
+				<option th:each="embalagem : ${embalagemList}"
+					th:value="${embalagem.id}" th:text="${embalagem.descricao}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="fermentacao">Fermentacao</label> <select
-				class="form-control" required>
+				class="form-control" th:field="*{fermentacao}" required>
 				<option value="">Selecione</option>
-				<option value="1">Ale</option>
-				<option value="2">Lager</option>
+				<option th:each="fermentacao : ${fermentacaoList}"
+					th:value="${fermentacao.id}" th:text="${fermentacao.descricao}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="litragem">Litragem</label> <select class="form-control"
-				required>
+				th:field="*{litragem}" required>
 				<option value="">Selecione</option>
-				<option value="1">Até 335ml</option>
-				<option value="2">Entre 335ml e 600ml</option>
-				<option value="3">Acima de 600ml</option>
+				<option th:each="litragem : ${litragemList}" th:value="${litragem.id}"
+					th:text="${litragem.descricao}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="nacionalidade">Nacionalidade</label> <select
-				class="form-control" required>
+				class="form-control" th:field="*{nacionalidade}" required>
 				<option value="">Selecione</option>
-				<option value="1">Nacional</option>
-				<option value="2">Internacional</option>
+				<option th:each="nacionalidade : ${nacionalidadeList}"
+					th:value="${nacionalidade.id}" th:text="${nacionalidade.descricao}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="paisOrigem">Pais de origem</label> <select
-				class="form-control" required>
+				class="form-control" th:field="*{paisOrigem}" required>
 				<option value="">Selecione</option>
-				<option value="1">Brasil</option>
-				<option value="2">Alemanha</option>
-				<option value="3">Argentina</option>
-				<option value="4">Bélgica</option>
-				<option value="5">EUA</option>
-				<option value="6">Inglaterra</option>
-				<option value="7">México</option>
-				<option value="8">Uruguai</option>
+				<option th:each="pais : ${paisList}" th:value="${pais.id}"
+					th:text="${pais.descricao}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="sabor">Sabor</label> <select class="form-control"
-				required>
+				th:field="*{sabor}" required>
 				<option value="">Selecione</option>
-				<option value="1">Adocicada</option>
-				<option value="2">Amarga</option>
-				<option value="3">Forte</option>
-				<option value="4">Frutada</option>
-				<option value="5">Suave</option>
+				<option th:each="sabor : ${saborList}" th:value="${sabor.id}"
+					th:text="${sabor.descricao}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
 			<label for="tipoCerveja">Tipo de cerveja</label> <select
-				class="form-control" required>
+				class="form-control" th:field="*{tipo}" required>
 				<option value="">Selecione</option>
-				<option value="1">Amber Lager</option>
-				<option value="2">Cerveja de trigo</option>
-				<option value="3">Dark Lager</option>
-				<option value="4">India Pale Ale(IPA)</option>
-				<option value="5">Pale Ale</option>
-				<option value="6">Pale Lager</option>
-				<option value="7">Pilsner</option>
-				<option value="8">Porter</option>
-				<option value="9">Specialty Beer</option>
-				<option value="10">Stout</option>
+				<option th:each="tipoCerveja : ${tipoCervejaList}"
+					th:value="${tipoCerveja.id}" th:text="${tipoCerveja.descricao}"></option>
 			</select>
 		</div>
 
 		<div class="form-group">
-			<label for="tipoCerveja">Faixa de preço</label> <select
-				class="form-control" required>
+			<label for="faixaPreco">Faixa de preço</label> <select
+				class="form-control" th:field="*{faixaPreco}" required>
 				<option value="">Selecione</option>
-				<option value="1">Até R$29,99</option>
-				<option value="2">De R$30,00 a R$59,99</option>
-				<option value="3">Acima de R$60,00</option>
+				<option th:each="faixaPreco : ${faixaPrecoList}"
+					th:value="${faixaPreco.id}" th:text="${faixaPreco.descricao}"></option>
 			</select>
 		</div>
 
