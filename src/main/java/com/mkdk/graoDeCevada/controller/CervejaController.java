@@ -1,5 +1,7 @@
 package com.mkdk.graoDeCevada.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import com.mkdk.graoDeCevada.repository.NacionalidadeRepository;
 import com.mkdk.graoDeCevada.repository.PaisRepository;
 import com.mkdk.graoDeCevada.repository.SaborRepository;
 import com.mkdk.graoDeCevada.repository.TipoCervejaRepository;
+import com.mkdk.graoDeCevada.repository.filter.CervejaFilter;
 
 @Controller
 @RequestMapping("/cerveja")
@@ -29,7 +32,7 @@ public class CervejaController {
 
 	@Autowired
 	private CervejaRepository repoCerveja;
-	
+
 	@Autowired
 	private FermentacaoRepository repoFermentacao;
 
@@ -85,6 +88,14 @@ public class CervejaController {
 		repoCerveja.save(cerveja);
 		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
 		return new ModelAndView("redirect:/cerveja/novo");
+	}
+
+	@GetMapping("/pesquisa")
+	public ModelAndView pesquisa(CervejaFilter cervejaFilter) {
+		ModelAndView mv = new ModelAndView("/cerveja/pesquisa");
+		mv.addObject("cervejaList",
+				repoCerveja.findByMarcaContainingIgnoreCase(Optional.ofNullable(cervejaFilter.getMarca()).orElse("%")));
+		return mv;
 	}
 
 }

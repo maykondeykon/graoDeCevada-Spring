@@ -119,3 +119,11 @@ footer a:hover, a:focus {
     font-weight: bold;
     text-shadow: 2px 2px 4px #000000;
 }
+
+.actionIcons{
+	text-align: center;
+}
+.actionIcons i{
+	cursor: pointer;
+	margin-right: 0.5em;
+}

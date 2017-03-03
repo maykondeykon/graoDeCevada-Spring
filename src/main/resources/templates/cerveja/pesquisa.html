@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-site}">
+<head>
+<title>Cadastro de cerveja</title>
+</head>
+<body>
+	<main layout:fragment="conteudo">
+
+	<h3 class="pageTitle">
+		<i class="fa fa-search" aria-hidden="true"></i> Pesquisa de cerveja
+	</h3>
+
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr>
+				<th>Marca</th>
+				<th>Categoria</th>
+				<th>Embalagem</th>
+				<th>Fermentação</th>
+				<th>Litragem</th>
+				<th>Nacionalidade</th>
+				<th>País de origem</th>
+				<th>Sabor</th>
+				<th>Tipo</th>
+				<th>Faixa de preço</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="cerveja: ${cervejaList}">
+				<td th:text="${cerveja.marca}"></td>
+				<td th:text="${cerveja.categoria.descricao}"></td>
+				<td th:text="${cerveja.embalagem.descricao}"></td>
+				<td th:text="${cerveja.fermentacao.descricao}"></td>
+				<td th:text="${cerveja.litragem.descricao}"></td>
+				<td th:text="${cerveja.nacionalidade.descricao}"></td>
+				<td th:text="${cerveja.paisOrigem.descricao}"></td>
+				<td th:text="${cerveja.sabor.descricao}"></td>
+				<td th:text="${cerveja.tipo.descricao}"></td>
+				<td th:text="${cerveja.faixaPreco.descricao}"></td>
+				<td class="actionIcons">
+					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</td>
+			</tr>
+		</tbody>
+
+
+	</table>
+	</main>
+</body>
+</html>
