@@ -13,7 +13,23 @@
 		<i class="fa fa-search" aria-hidden="true"></i> Pesquisa de cerveja
 	</h3>
 
-	<table class="table table-hover table-bordered">
+	<form method="GET" class="form-vertical  js-form-loading"
+		th:object="${cervejaFilter}">
+
+		<div class="form-group">
+			<div class="input-group">
+				<input id="marca" type="text" class="form-control"
+					placeholder="Pesquise pela marca" th:field="*{marca}" /> <span
+					class="input-group-btn">
+					<button class="btn btn-default" type="submit">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+	</form>
+
+	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
 				<th>Marca</th>
@@ -41,9 +57,8 @@
 				<td th:text="${cerveja.sabor.descricao}"></td>
 				<td th:text="${cerveja.tipo.descricao}"></td>
 				<td th:text="${cerveja.faixaPreco.descricao}"></td>
-				<td class="actionIcons">
-					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-					<i class="fa fa-trash" aria-hidden="true"></i>
+				<td class="actionIcons"><i class="fa fa-pencil-square-o"
+					aria-hidden="true"></i> <i class="fa fa-trash" aria-hidden="true"></i>
 				</td>
 			</tr>
 		</tbody>
