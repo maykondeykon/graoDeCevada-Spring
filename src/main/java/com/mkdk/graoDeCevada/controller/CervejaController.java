@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -86,8 +87,20 @@ public class CervejaController {
 		}
 
 		repoCerveja.save(cerveja);
-		attributes.addFlashAttribute("mensagem", "Cerveja salva com sucesso!");
-		return new ModelAndView("redirect:/cerveja/novo");
+		String msg = "";
+		if(cerveja.getId() == null){
+			msg = "Cerveja salva com sucesso!";
+		}else{
+			msg = "Cerveja atualizada com sucesso!";
+		}
+		attributes.addFlashAttribute("mensagem", msg);
+		return new ModelAndView("redirect:/cerveja/pesquisa");
+	}
+	
+	@GetMapping("/{id}")
+	public ModelAndView editar(@PathVariable Long id) {
+		Cerveja cerveja = repoCerveja.findOne(id);
+		return novo(cerveja);
 	}
 
 	@GetMapping("/pesquisa")

@@ -7,6 +7,10 @@ body {
     font-family: 'Dosis', sans-serif;
 }
 
+.min-height{
+	min-height: 25em;
+}
+
 nav {
     z-index: 2;
 }

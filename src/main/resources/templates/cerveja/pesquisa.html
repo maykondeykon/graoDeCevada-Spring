@@ -13,13 +13,21 @@
 		<i class="fa fa-search" aria-hidden="true"></i> Pesquisa de cerveja
 	</h3>
 
+	<div class="alert alert-success alert-dismissible" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<i class="fa  fa-exclamation-circle"></i> <span th:text="${mensagem}"></span>
+	</div>
+
 	<form method="GET" class="form-vertical  js-form-loading"
 		th:object="${cervejaFilter}">
 
 		<div class="form-group">
 			<div class="input-group">
-				<input id="marca" type="text" class="form-control"
-					placeholder="Pesquise pela marca" th:field="*{marca}" /> <span
+				<input id="marca" type="text" class="form-control focus"
+					placeholder="Pesquise pela marca" th:field="*{marca}" autofocus/> <span
 					class="input-group-btn">
 					<button class="btn btn-default" type="submit">
 						<span class="glyphicon glyphicon-search"></span>
@@ -57,9 +65,13 @@
 				<td th:text="${cerveja.sabor.descricao}"></td>
 				<td th:text="${cerveja.tipo.descricao}"></td>
 				<td th:text="${cerveja.faixaPreco.descricao}"></td>
-				<td class="actionIcons"><i class="fa fa-pencil-square-o"
-					aria-hidden="true"></i> <i class="fa fa-trash" aria-hidden="true"></i>
-				</td>
+				<td class="actionIcons"><a
+					th:href="@{/cerveja/{id}(id=${cerveja.id})}"> <i
+						class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				</a> <i class="fa fa-trash" aria-hidden="true"></i></td>
+			</tr>
+			<tr th:if="${cervejaList.empty}">
+				<td colspan="11">Nenhuma cerveja cadastrada</td>
 			</tr>
 		</tbody>
 
