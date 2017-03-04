@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,13 +87,15 @@ public class CervejaController {
 			return novo(cerveja);
 		}
 
-		repoCerveja.save(cerveja);
 		String msg = "";
 		if(cerveja.getId() == null){
-			msg = "Cerveja salva com sucesso!";
+			msg = "Cerveja inserida com sucesso!";
 		}else{
 			msg = "Cerveja atualizada com sucesso!";
 		}
+		
+		repoCerveja.save(cerveja);
+		
 		attributes.addFlashAttribute("mensagem", msg);
 		return new ModelAndView("redirect:/cerveja/pesquisa");
 	}
@@ -101,6 +104,13 @@ public class CervejaController {
 	public ModelAndView editar(@PathVariable Long id) {
 		Cerveja cerveja = repoCerveja.findOne(id);
 		return novo(cerveja);
+	}
+	
+	@DeleteMapping("/{id}")
+	public String apagar(@PathVariable Long id, RedirectAttributes attributes) {
+		repoCerveja.delete(id);
+		attributes.addFlashAttribute("mensagem", "Cerveja removida com sucesso");
+		return "redirect:/cerveja/pesquisa";
 	}
 
 	@GetMapping("/pesquisa")
