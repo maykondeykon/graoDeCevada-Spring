@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout-site}">
+<head>
+<title>Contato</title>
+</head>
+<body>
+	<main layout:fragment="conteudo">
+	<h3 class="pageTitle focus">
+		<i class="fa fa-envelope-open" aria-hidden="true"></i> Caixa de entrada
+	</h3>
+	
+	<div class="alert alert-success alert-dismissible" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<i class="fa  fa-exclamation-circle"></i> <span th:text="${mensagem}"></span>
+	</div>
+	
+	<div class="min-height">
+	<div th:each="contato: ${contatoList}" class="navContatoList" th:classappend="${contato.lido} ? '' : naoLido">
+		<ul  class="nav nav-pills">
+			<li role="presentation" data-toggle="tooltip" data-placement="top" title="Remetente"><a th:text="${contato.nome}"
+			data-toggle="collapse" th:href="${'#msgBlock-' + contato.id}" aria-expanded="false" aria-controls="collapseExample"
+			></a></li>
+			<li role="presentation" class="disabled" data-toggle="tooltip" data-placement="top" title="E-mail"><a th:text="${contato.email}"></a></li>
+			<li role="presentation" class="disabled" data-toggle="tooltip" data-placement="top" title="Enviado em"><a th:text="${#dates.format(contato.dataEnvio, 'dd/MM/yyyy HH:mm')}"></a></li>
+			<li role="presentation" class="disabled pull-right">
+			<div class="actionsContato pull-right">
+			<span data-toggle="tooltip" data-placement="top" 
+				th:title="${contato.lido} ? 'Marcar como não lido' : 'Marcar como lido'"
+				data:contatoid="${contato.id}"
+				class="alteraContatoLido">
+					<i class="fa" th:classappend="${contato.lido} ? fa-check-square-o : fa-square-o" 
+					aria-hidden="true"></i>
+				</span>
+				<span data-toggle="tooltip" data-placement="top" title="Excluir">
+					<i class="fa fa-trash" aria-hidden="true"
+					data-toggle="modal"
+					data-target="#confirmaExclusaoModal"
+					data-msg="a mensagem de"
+					data:item="${contato.nome}"
+					data:url-delete="@{/contato/{id}(id=${contato.id})}">
+					</i>
+				</span>
+			</div>
+				
+				</li>
+		</ul>
+		<div class="collapse" th:id="${'msgBlock-' + contato.id}">
+		  <div class="well">
+		  <p th:text="${contato.mensagem}"></p>
+		  </div>
+		</div>
+	</div>
+	
+	<div class="alert alert-success" role="alert" th:if="${contatoList.empty}">
+				<i class="fa  fa-exclamation-circle"></i> <span>Nenhuma mensagem recebida</span>
+	</div>
+	
+	</div>
+	
+	<div class="modal  fade" id="confirmaExclusaoModal" tabindex="-1"
+			role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form th:action="@{/cerveja}" method="POST">
+						<input type="hidden" name="_method" value="DELETE" />
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Excluir cerveja</h4>
+						</div>
+						<div class="modal-body">
+							<span>Tem certeza?</span>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn  btn-default"
+								data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn  btn-primary">Excluir</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</main>
+
+</body>
+</html>

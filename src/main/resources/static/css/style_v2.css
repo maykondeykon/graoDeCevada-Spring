@@ -1,133 +1,184 @@
 @font-face {
-    font-family: "Dosis";
-    src: url("../fonts/Dosis-Regular.otf");
+	font-family: "Dosis";
+	src: url("../fonts/Dosis-Regular.otf");
 }
 
 body {
-    font-family: 'Dosis', sans-serif;
+	font-family: 'Dosis', sans-serif;
 }
 
-.min-height{
+.min-height {
 	min-height: 25em;
 }
 
 nav {
-    z-index: 2;
+	z-index: 2;
 }
 
 .navbar-brand {
-    padding: 7px 2px;
+	padding: 7px 2px;
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: #3a1f02;
+	color: #3a1f02;
 }
 
 ul.nav a:hover {
-    border-bottom: 2px solid #e5a42f;
+	border-bottom: 2px solid #e5a42f;
+}
+
+.navContatoList {
+	border: 1px solid #ddd;
+}
+
+.navContatoList li, a, li.disabled {
+	cursor: pointer !important;
+}
+
+.navContatoList li {
+	min-width: 15em;
+}
+
+.navContatoList ul a:hover {
+	border-bottom: 0;
+	background-color: transparent;
+}
+
+.navContatoList ul a:focus {
+	border-bottom: 0;
+	background-color: transparent;
+	color: black;
+	text-shadow: none;
 }
 
 .affix {
-    top: 0;
-    width: 100%;
-    -webkit-transition: all .5s ease-in-out;
-    transition: all .5s ease-in-out;
+	top: 0;
+	width: 100%;
+	-webkit-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
 }
 
 .affix-top {
-    position: static;
-    top: -35px;
+	position: static;
+	top: -35px;
 }
 
 .affix+.container-fluid {
-    padding-top: 70px;
+	padding-top: 70px;
 }
 
 .topo {
-    background-color: #3a1f02;
-    border-bottom: .4rem solid #cb6908;
-    padding: 1.5em 0 1.5em 0;
+	background-color: #3a1f02;
+	border-bottom: .4rem solid #cb6908;
+	padding: 1.5em 0 1.5em 0;
 }
 
 .topo img {
-    margin-left: auto;
-    margin-right: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .pageTitle {
-    color: #3a1f02;
-    padding-bottom: 1em;
+	color: #3a1f02;
+	padding-bottom: 1em;
 }
 
 form {
-    padding-bottom: 1em;
+	padding-bottom: 1em;
 }
 
 form label:first-of-type {
-    color: maroon;
+	color: maroon;
 }
 
 .media-body {
-    vertical-align: middle;
+	vertical-align: middle;
 }
 
 .media-list li {
-    background-color: #f7dc49;
-    border: 1px solid #f7dc49;
-    padding: 0.5em;
-    box-shadow: 4px 4px 5px #888888;
+	background-color: #f7dc49;
+	border: 1px solid #f7dc49;
+	padding: 0.5em;
+	box-shadow: 4px 4px 5px #888888;
 }
 
 .thumbnail {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .figureRanking {
-    height: 10em;
+	height: 10em;
 }
 
 .rankingNumber {
-    font-size: 3em;
-    color: #fff;
-    font-weight: lighter;
-    text-shadow: 2px 2px 4px #000000;
-    position: absolute;
-    padding-left: 0.1em;
+	font-size: 3em;
+	color: #fff;
+	font-weight: lighter;
+	text-shadow: 2px 2px 4px #000000;
+	position: absolute;
+	padding-left: 0.1em;
 }
 
 .noResize {
-    resize: none;
+	resize: none;
 }
 
 .btnLar {
-    background-color: #cb6908;
-    color: #fff;
+	background-color: #cb6908;
+	color: #fff;
 }
 
 footer {
-    background-image: url("../img/4.png");
-    color: #fff;
-    padding: 1.5em 0 1.5em 1em;
-    font-family: inherit;
-    position: absolute;
-    width: 100%;
+	background-image: url("../img/4.png");
+	color: #fff;
+	padding: 1.5em 0 1.5em 1em;
+	font-family: inherit;
+	position: absolute;
+	width: 100%;
 }
 
 footer a {
-    color: #fff;
+	color: #fff;
 }
 
 footer a:hover, a:focus {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px #000000;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	text-shadow: 2px 2px 4px #000000;
 }
 
-.actionIcons{
+.centerText {
 	text-align: center;
 }
-.actionIcons i{
+
+.naoLido {
+	font-weight: bold;
+	background-color: #dff0d8;
+}
+
+.checkLido {
+	margin-top: 0.7em;
+}
+
+.centerText th {
+	text-align: center;
+}
+
+.actionIcons {
+	text-align: center;
+}
+
+.actionIcons i {
 	cursor: pointer;
 	margin-right: 0.5em;
+}
+
+.actionsContato {
+	display: inline-block;
+	padding: 0.7em;
+}
+
+.actionsContato span {
+	padding: 0.7em;
 }

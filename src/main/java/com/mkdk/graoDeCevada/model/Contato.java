@@ -2,6 +2,7 @@ package com.mkdk.graoDeCevada.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Contato {
@@ -29,9 +32,10 @@ public class Contato {
 	private String email;
 
 	@NotBlank
+	@Column(columnDefinition="TEXT")
 	private String mensagem;
 
-	private Boolean lido;
+	private Boolean lido = false;
 
 	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date dataEnvio;
@@ -69,7 +73,7 @@ public class Contato {
 	}
 
 	public Boolean getLido() {
-		return lido;
+		return this.lido;
 	}
 
 	public void setLido(Boolean lido) {
