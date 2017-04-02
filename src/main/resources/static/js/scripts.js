@@ -30,3 +30,9 @@ $(document).on("click", ".alteraContatoLido", function () {
 	  });
 	
 });
+
+$(function() {
+    $('.ratingStar').barrating({
+      theme: 'fontawesome-stars'
+    });
+ });

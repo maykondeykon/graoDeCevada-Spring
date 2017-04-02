@@ -13,7 +13,8 @@
 		<i class="fa fa-search" aria-hidden="true"></i> Pesquisa de cerveja
 	</h3>
 
-	<div class="alert alert-success alert-dismissible" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
+	<div class="alert alert-success alert-dismissible" role="alert"
+		th:if="${!#strings.isEmpty(mensagem)}">
 		<button type="button" class="close" data-dismiss="alert"
 			aria-label="Close">
 			<span aria-hidden="true">&times;</span>
@@ -27,8 +28,8 @@
 		<div class="form-group">
 			<div class="input-group">
 				<input id="marca" type="text" class="form-control focus"
-					placeholder="Pesquise pela marca" th:field="*{marca}" autofocus/> <span
-					class="input-group-btn">
+					placeholder="Pesquise pela marca" th:field="*{marca}" autofocus />
+				<span class="input-group-btn">
 					<button class="btn btn-default" type="submit">
 						<span class="glyphicon glyphicon-search"></span>
 					</button>
@@ -65,54 +66,158 @@
 				<td th:text="${cerveja.sabor.descricao}"></td>
 				<td th:text="${cerveja.tipo.descricao}"></td>
 				<td th:text="${cerveja.faixaPreco.descricao}"></td>
-				<td class="actionIcons">
-				<a th:href="@{/cerveja/{id}(id=${cerveja.id})}"
-				data-toggle="tooltip" data-placement="top" title="Editar"> 
-					<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-				</a> 
-				<span data-toggle="tooltip" data-placement="top" title="Excluir">
-					<i class="fa fa-trash" aria-hidden="true"
-					data-toggle="modal"
-					data-target="#confirmaExclusaoModal"
-					data-msg="a cerveja"
-					data:item="${cerveja.marca}"
-					data:url-delete="@{/cerveja/{id}(id=${cerveja.id})}">
-					</i>
-				</span>
-					
-				</td>
+				<td class="actionIcons"><a
+					th:href="@{/cerveja/{id}(id=${cerveja.id})}" data-toggle="tooltip"
+					data-placement="top" title="Editar"> <i
+						class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				</a> <span data-toggle="tooltip" data-placement="top" title="Excluir">
+						<i class="fa fa-trash" aria-hidden="true" data-toggle="modal"
+						data-target="#confirmaExclusaoModal" data-msg="a cerveja"
+						data:item="${cerveja.marca}"
+						data:url-delete="@{/cerveja/{id}(id=${cerveja.id})}"> </i>
+				</span> <span data-toggle="tooltip" data-placement="top" title="Avaliar">
+						<i class="fa fa-thumbs-o-up" aria-hidden="true"
+						data-toggle="modal" data-target="#avaliacaoModal"
+						data-msg="a cerveja" data:item="${cerveja.marca}"
+						data:url-delete="@{/cerveja/{id}(id=${cerveja.id})}"> </i>
+				</span></td>
 			</tr>
 			<tr th:if="${cervejaList.empty}">
 				<td colspan="11">Nenhuma cerveja cadastrada</td>
 			</tr>
 		</tbody>
 	</table>
-	
+
 	<div class="modal  fade" id="confirmaExclusaoModal" tabindex="-1"
-			role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<form th:action="@{/cerveja}" method="POST">
-						<input type="hidden" name="_method" value="DELETE" />
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-							<h4 class="modal-title" id="myModalLabel">Excluir cerveja</h4>
-						</div>
-						<div class="modal-body">
-							<span>Tem certeza?</span>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn  btn-default"
-								data-dismiss="modal">Cancelar</button>
-							<button type="submit" class="btn  btn-primary">Excluir</button>
-						</div>
-					</form>
-				</div>
+		role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form th:action="@{/cerveja}" method="POST">
+					<input type="hidden" name="_method" value="DELETE" />
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Excluir cerveja</h4>
+					</div>
+					<div class="modal-body">
+						<span>Tem certeza?</span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn  btn-default"
+							data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn  btn-primary">Excluir</button>
+					</div>
+				</form>
 			</div>
 		</div>
+	</div>
+
+	<div class="modal  fade" id="avaliacaoModal" tabindex="-1"
+		role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Avaliar cerveja</h4>
+				</div>
+				<div class="modal-body">
+					<form th:action="@{/cerveja}" method="POST">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<label for="aroma">Aroma</label> <select
+											class="form-control ratingStar">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-12">
+										<label for="aparencia">Aparência</label> <select
+											class="form-control ratingStar">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-12">
+										<label for="sabor">Sabor</label> <select
+											class="form-control ratingStar">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-12">
+										<label for="sensacao">Sensação</label> <select
+											class="form-control ratingStar">
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="col-sm-12">
+										<label for="conjunto">Conjunto</label> <select
+											class="form-control ratingStar">
+											<option value="1.5">1</option>
+											<option value="2.5">2</option>
+											<option value="3.5">3</option>
+											<option value="4.5">4</option>
+											<option value="5.5">5</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-sm-8">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<label for="nome">Comentário</label>
+										<textarea name="msg" id="msg" class="form-control noResize"
+											rows="11" required maxlength="255"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn  btn-primary">Excluir</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
 	</main>
 </body>
 </html>

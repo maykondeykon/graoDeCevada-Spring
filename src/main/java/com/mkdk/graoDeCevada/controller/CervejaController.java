@@ -62,6 +62,11 @@ public class CervejaController {
 	@Autowired
 	private FaixaPrecoRepository repoFaixaPreco;
 
+	/**
+	 * TODO adicionar foto da cerveja
+	 * @param cerveja
+	 * @return
+	 */
 	@GetMapping("/novo")
 	public ModelAndView novo(Cerveja cerveja) {
 
@@ -113,6 +118,11 @@ public class CervejaController {
 		return "redirect:/cerveja/pesquisa";
 	}
 
+	/**
+	 * TODO Implementar modal de votação
+	 * @param cervejaFilter
+	 * @return
+	 */
 	@GetMapping("/pesquisa")
 	public ModelAndView pesquisa(CervejaFilter cervejaFilter) {
 		ModelAndView mv = new ModelAndView("/cerveja/pesquisa");
