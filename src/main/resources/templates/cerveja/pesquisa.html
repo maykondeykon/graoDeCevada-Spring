@@ -78,8 +78,7 @@
 				</span> <span data-toggle="tooltip" data-placement="top" title="Avaliar">
 						<i class="fa fa-thumbs-o-up" aria-hidden="true"
 						data-toggle="modal" data-target="#avaliacaoModal"
-						data-msg="a cerveja" data:item="${cerveja.marca}"
-						data:url-delete="@{/cerveja/{id}(id=${cerveja.id})}"> </i>
+						data-msg="a cerveja" data:item="${cerveja.marca}"> </i>
 				</span></td>
 			</tr>
 			<tr th:if="${cervejaList.empty}">
@@ -127,13 +126,14 @@
 					<h4 class="modal-title" id="myModalLabel">Avaliar cerveja</h4>
 				</div>
 				<div class="modal-body">
-					<form th:action="@{/cerveja}" method="POST">
+				<h4 id="nomeCerveja"></h4>
+					<form>
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group">
 									<div class="col-sm-12">
 										<label for="aroma">Aroma</label> <select
-											class="form-control ratingStar">
+											class="form-control ratingStar" id="aromaAval">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -146,7 +146,7 @@
 								<div class="form-group">
 									<div class="col-sm-12">
 										<label for="aparencia">Aparência</label> <select
-											class="form-control ratingStar">
+											class="form-control ratingStar" id="aparenciaAval">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -159,7 +159,7 @@
 								<div class="form-group">
 									<div class="col-sm-12">
 										<label for="sabor">Sabor</label> <select
-											class="form-control ratingStar">
+											class="form-control ratingStar" id="saborAval">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -172,7 +172,7 @@
 								<div class="form-group">
 									<div class="col-sm-12">
 										<label for="sensacao">Sensação</label> <select
-											class="form-control ratingStar">
+											class="form-control ratingStar" id="sensacaoAval">
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -185,7 +185,7 @@
 								<div class="form-group">
 									<div class="col-sm-12">
 										<label for="conjunto">Conjunto</label> <select
-											class="form-control ratingStar">
+											class="form-control ratingStar" id="conjuntoAval">
 											<option value="1.5">1</option>
 											<option value="2.5">2</option>
 											<option value="3.5">3</option>
@@ -212,7 +212,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
-					<button type="submit" class="btn  btn-primary">Excluir</button>
+					<button class="btn  btn-primary btSalvarAvaliacao">Avaliar</button>
 				</div>
 
 			</div>

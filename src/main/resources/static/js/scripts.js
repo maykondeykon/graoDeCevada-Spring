@@ -31,6 +31,43 @@ $(document).on("click", ".alteraContatoLido", function () {
 	
 });
 
+$('#avaliacaoModal').on('show.bs.modal', function(event) {
+	var botao = $(event.relatedTarget);
+	var item = botao.data('item');
+	var msg = botao.data('msg');
+	var url = botao.data('url-delete');
+	
+	var modal = $(this);
+	var form = modal.find('form');
+	var nomeCerveja = modal.find('#nomeCerveja');
+	
+	$(nomeCerveja).html(item);
+});
+
+$(document).on("click", ".btSalvarAvaliacao", function () {
+	var aromaAval = $(this).parent().parent().find('#aromaAval').val();
+	var aparenciaAval = $(this).parent().parent().find('#aparenciaAval').val();
+	var saborAval = $(this).parent().parent().find('#saborAval').val();
+	var sensacaoAval = $(this).parent().parent().find('#sensacaoAval').val();
+	var conjuntoAval = $(this).parent().parent().find('#conjuntoAval').val();
+	
+	var params = {
+			aromaAval: aromaAval,
+			aparenciaAval: aparenciaAval,
+			saborAval: saborAval,
+			sensacaoAval: sensacaoAval,
+			conjuntoAval: conjuntoAval
+        };
+	
+	console.log(saborAval);
+	
+//	$.get( "/contato/lido/"+id+"")
+//	  .done(function( data ) {
+//		  location.reload();
+//	  });
+	
+});
+
 $(function() {
     $('.ratingStar').barrating({
       theme: 'fontawesome-stars'
