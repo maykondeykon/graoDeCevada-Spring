@@ -51,6 +51,7 @@
 				<th>Sabor</th>
 				<th>Tipo</th>
 				<th>Faixa de preço</th>
+				<th>Avaliação geral</th>
 				<th></th>
 			</tr>
 		</thead>
@@ -66,6 +67,7 @@
 				<td th:text="${cerveja.sabor.descricao}"></td>
 				<td th:text="${cerveja.tipo.descricao}"></td>
 				<td th:text="${cerveja.faixaPreco.descricao}"></td>
+				<td th:text="${avaliacaoService.getAvaliacaoGeral(cerveja)}"></td>
 				<td class="actionIcons"><a
 					th:href="@{/cerveja/{id}(id=${cerveja.id})}" data-toggle="tooltip"
 					data-placement="top" title="Editar"> <i
@@ -79,7 +81,8 @@
 						<i class="fa fa-thumbs-o-up" aria-hidden="true"
 						data-toggle="modal" data-target="#avaliacaoModal"
 						data-msg="a cerveja" data:item="${cerveja.marca}" data:id="${cerveja.id}"> </i>
-				</span></td>
+				</span>
+				</td>
 			</tr>
 			<tr th:if="${cervejaList.empty}">
 				<td colspan="11">Nenhuma cerveja cadastrada</td>

@@ -2,7 +2,6 @@ package com.mkdk.graoDeCevada.controller;
 
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -21,8 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mkdk.graoDeCevada.model.Avaliacao;
 import com.mkdk.graoDeCevada.model.Cerveja;
-import com.mkdk.graoDeCevada.model.Contato;
-import com.mkdk.graoDeCevada.model.Usuario;
 import com.mkdk.graoDeCevada.repository.AvaliacaoRepository;
 import com.mkdk.graoDeCevada.repository.CategoriaRepository;
 import com.mkdk.graoDeCevada.repository.CervejaRepository;
@@ -37,6 +34,7 @@ import com.mkdk.graoDeCevada.repository.SaborRepository;
 import com.mkdk.graoDeCevada.repository.TipoCervejaRepository;
 import com.mkdk.graoDeCevada.repository.UsuarioReposistory;
 import com.mkdk.graoDeCevada.repository.filter.CervejaFilter;
+import com.mkdk.graoDeCevada.service.AvaliacaoService;
 
 @Controller
 @RequestMapping("/cerveja")
@@ -80,6 +78,10 @@ public class CervejaController {
 	
 	@Autowired
 	private PerfilRepository repoPerfil;
+	
+	@Autowired
+	private AvaliacaoService avaliacaoService;
+	
 	/**
 	 * TODO adicionar foto da cerveja
 	 * @param cerveja
@@ -137,13 +139,13 @@ public class CervejaController {
 	}
 
 	/**
-	 * TODO Implementar modal de votação
 	 * @param cervejaFilter
 	 * @return
 	 */
 	@GetMapping("/pesquisa")
 	public ModelAndView pesquisa(CervejaFilter cervejaFilter) {
 		ModelAndView mv = new ModelAndView("/cerveja/pesquisa");
+		mv.addObject("avaliacaoService", avaliacaoService);
 		mv.addObject("cervejaList",
 				repoCerveja.findByMarcaContainingIgnoreCase(Optional.ofNullable(cervejaFilter.getMarca()).orElse("%")));
 		return mv;
@@ -151,8 +153,8 @@ public class CervejaController {
 	
 	@PostMapping("/avalia")
 	@ResponseBody
-	public void contatoLido(HttpServletRequest request, HttpServletResponse response) {
-		Long idCerveja = Long.parseLong(request.getParameter("aromaAval"));
+	public void contatoLido(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Long idCerveja = Long.parseLong(request.getParameter("idCerveja"));
 		double aromaAval = Double.parseDouble(request.getParameter("aromaAval"));
 		double aparenciaAval = Double.parseDouble(request.getParameter("aparenciaAval"));
 		double saborAval = Double.parseDouble(request.getParameter("saborAval"));
@@ -160,18 +162,23 @@ public class CervejaController {
 		double conjuntoAval = Double.parseDouble(request.getParameter("conjuntoAval"));
 		String msgAval = request.getParameter("msgAval");
 		
-		Avaliacao avaliacao = new Avaliacao();
-		avaliacao.setCerveja(repoCerveja.findOne(idCerveja));
-		avaliacao.setAparencia(aparenciaAval);
-		avaliacao.setAroma(aromaAval);
-		avaliacao.setConjunto(conjuntoAval);
-		avaliacao.setSabor(saborAval);
-		avaliacao.setSensacao(sensacaoAval);
-		avaliacao.setComentario(msgAval);
-		avaliacao.setUsuario(repoUsuario.findOne((long) 1));
+		Cerveja cerveja = repoCerveja.findOne(idCerveja);
+		if(cerveja != null){
+			Avaliacao avaliacao = new Avaliacao();
+			avaliacao.setCerveja(cerveja);
+			avaliacao.setAparencia(aparenciaAval);
+			avaliacao.setAroma(aromaAval);
+			avaliacao.setConjunto(conjuntoAval);
+			avaliacao.setSabor(saborAval);
+			avaliacao.setSensacao(sensacaoAval);
+			avaliacao.setComentario(msgAval);
+			avaliacao.setUsuario(repoUsuario.findOne((long) 1));//TODO Pegar da sessão
+			
+			repoAvaliacao.save(avaliacao);
+		}else{
+			throw new Exception("Cerveja não encontrada");
+		}
 		
-		
-		repoAvaliacao.save(avaliacao);
 	}
 
 }
