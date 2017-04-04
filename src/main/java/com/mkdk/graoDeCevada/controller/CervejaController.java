@@ -153,7 +153,7 @@ public class CervejaController {
 	
 	@PostMapping("/avalia")
 	@ResponseBody
-	public void contatoLido(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void avalia(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Long idCerveja = Long.parseLong(request.getParameter("idCerveja"));
 		double aromaAval = Double.parseDouble(request.getParameter("aromaAval"));
 		double aparenciaAval = Double.parseDouble(request.getParameter("aparenciaAval"));
