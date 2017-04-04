@@ -33,38 +33,53 @@ $(document).on("click", ".alteraContatoLido", function () {
 
 $('#avaliacaoModal').on('show.bs.modal', function(event) {
 	var botao = $(event.relatedTarget);
+	var id = botao.data('id');
 	var item = botao.data('item');
 	var msg = botao.data('msg');
 	var url = botao.data('url-delete');
 	
+	$('.ratingStar').barrating('clear');
+	$(this).find('.alert').remove();
+	$('#msg').val('');
+	
 	var modal = $(this);
 	var form = modal.find('form');
+	var idCerveja = modal.find('#idCerveja');
 	var nomeCerveja = modal.find('#nomeCerveja');
 	
+	
+	$(idCerveja).val(id);
 	$(nomeCerveja).html(item);
 });
 
 $(document).on("click", ".btSalvarAvaliacao", function () {
+	var idCerveja = $(this).parent().parent().find('#idCerveja').val();
 	var aromaAval = $(this).parent().parent().find('#aromaAval').val();
 	var aparenciaAval = $(this).parent().parent().find('#aparenciaAval').val();
 	var saborAval = $(this).parent().parent().find('#saborAval').val();
 	var sensacaoAval = $(this).parent().parent().find('#sensacaoAval').val();
 	var conjuntoAval = $(this).parent().parent().find('#conjuntoAval').val();
+	var msgAval = $(this).parent().parent().find('#msg').val();
+	
+	var alertSuccess = '<div class="alert alert-success" role="alert">Sua avaliação foi recebida com sucesso</div>';
+	var modalBody = $(this).parent().parent().find('.modal-body');
 	
 	var params = {
+			idCerveja: idCerveja,
 			aromaAval: aromaAval,
 			aparenciaAval: aparenciaAval,
 			saborAval: saborAval,
 			sensacaoAval: sensacaoAval,
-			conjuntoAval: conjuntoAval
+			conjuntoAval: conjuntoAval,
+			msgAval:msgAval
         };
 	
-	console.log(saborAval);
+	console.log(params);
 	
-//	$.get( "/contato/lido/"+id+"")
-//	  .done(function( data ) {
-//		  location.reload();
-//	  });
+	$.post( "/cerveja/avalia", params)
+	  .done(function( data ) {
+	    $(modalBody).prepend(alertSuccess);
+	  });
 	
 });
 

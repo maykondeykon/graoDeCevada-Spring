@@ -1,0 +1,11 @@
+INSERT INTO `categoria` VALUES (1,'Premium'),(2,'Especiais');
+INSERT INTO `embalagem` VALUES (1,'Lata'),(2,'Litrão'),(3,'Litrinho'),(4,'Long neck'),(5,'Garrafa');
+INSERT INTO `faixa_preco` VALUES (1,'Até R$29,99'),(2,'De R$30,00 a R$ 59,99'),(3,'Acima de R$60,00');
+INSERT INTO `fermentacao` VALUES (1,'Ale'),(2,'Lager');
+INSERT INTO `litragem` VALUES (1,'Até 335ml'),(2,'Entre 335 e 600ml'),(3,'Acima de 600ml');
+INSERT INTO `nacionalidade` VALUES (1,'Nacional'),(2,'Internacional');
+INSERT INTO `pais` VALUES (1,'Alemanha'),(2,'Argentina'),(3,'Bélgica'),(4,'Brasil'),(5,'EUA'),(6,'Inglaterra'),(7,'México'),(8,'Uruguai');
+INSERT INTO `sabor` VALUES (1,'Adocicada'),(2,'Amarga'),(3,'Forte'),(4,'Frutada'),(5,'Suave');
+INSERT INTO `tipo_cerveja` VALUES (1,'Amber Lager'),(2,'Cerveja de trigo'),(3,'Dark Lager'),(4,'India Pale Ale(IPA)'),(5,'Pale Ale'),(6,'Pale Lager'),(7,'Pilsner'),(8,'Porter'),(9,'Specialty Beer'),(10,'Stout');
+INSERT INTO `perfil` VALUES (1,'Administrador'),(2,'Associado');
+INSERT INTO `usuario` VALUES (1,'maykondeykon@gmail.com','Maykon Deykon',1);

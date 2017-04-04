@@ -2,6 +2,9 @@ package com.mkdk.graoDeCevada.controller;
 
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mkdk.graoDeCevada.model.Avaliacao;
 import com.mkdk.graoDeCevada.model.Cerveja;
+import com.mkdk.graoDeCevada.model.Contato;
+import com.mkdk.graoDeCevada.model.Usuario;
+import com.mkdk.graoDeCevada.repository.AvaliacaoRepository;
 import com.mkdk.graoDeCevada.repository.CategoriaRepository;
 import com.mkdk.graoDeCevada.repository.CervejaRepository;
 import com.mkdk.graoDeCevada.repository.EmbalagemRepository;
@@ -24,8 +32,10 @@ import com.mkdk.graoDeCevada.repository.FermentacaoRepository;
 import com.mkdk.graoDeCevada.repository.LitragemRepository;
 import com.mkdk.graoDeCevada.repository.NacionalidadeRepository;
 import com.mkdk.graoDeCevada.repository.PaisRepository;
+import com.mkdk.graoDeCevada.repository.PerfilRepository;
 import com.mkdk.graoDeCevada.repository.SaborRepository;
 import com.mkdk.graoDeCevada.repository.TipoCervejaRepository;
+import com.mkdk.graoDeCevada.repository.UsuarioReposistory;
 import com.mkdk.graoDeCevada.repository.filter.CervejaFilter;
 
 @Controller
@@ -61,7 +71,15 @@ public class CervejaController {
 
 	@Autowired
 	private FaixaPrecoRepository repoFaixaPreco;
-
+	
+	@Autowired
+	private AvaliacaoRepository repoAvaliacao;
+	
+	@Autowired
+	private UsuarioReposistory repoUsuario;
+	
+	@Autowired
+	private PerfilRepository repoPerfil;
 	/**
 	 * TODO adicionar foto da cerveja
 	 * @param cerveja
@@ -129,6 +147,31 @@ public class CervejaController {
 		mv.addObject("cervejaList",
 				repoCerveja.findByMarcaContainingIgnoreCase(Optional.ofNullable(cervejaFilter.getMarca()).orElse("%")));
 		return mv;
+	}
+	
+	@PostMapping("/avalia")
+	@ResponseBody
+	public void contatoLido(HttpServletRequest request, HttpServletResponse response) {
+		Long idCerveja = Long.parseLong(request.getParameter("aromaAval"));
+		double aromaAval = Double.parseDouble(request.getParameter("aromaAval"));
+		double aparenciaAval = Double.parseDouble(request.getParameter("aparenciaAval"));
+		double saborAval = Double.parseDouble(request.getParameter("saborAval"));
+		double sensacaoAval = Double.parseDouble(request.getParameter("sensacaoAval"));
+		double conjuntoAval = Double.parseDouble(request.getParameter("conjuntoAval"));
+		String msgAval = request.getParameter("msgAval");
+		
+		Avaliacao avaliacao = new Avaliacao();
+		avaliacao.setCerveja(repoCerveja.findOne(idCerveja));
+		avaliacao.setAparencia(aparenciaAval);
+		avaliacao.setAroma(aromaAval);
+		avaliacao.setConjunto(conjuntoAval);
+		avaliacao.setSabor(saborAval);
+		avaliacao.setSensacao(sensacaoAval);
+		avaliacao.setComentario(msgAval);
+		avaliacao.setUsuario(repoUsuario.findOne((long) 1));
+		
+		
+		repoAvaliacao.save(avaliacao);
 	}
 
 }

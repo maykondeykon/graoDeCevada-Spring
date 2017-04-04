@@ -78,7 +78,7 @@
 				</span> <span data-toggle="tooltip" data-placement="top" title="Avaliar">
 						<i class="fa fa-thumbs-o-up" aria-hidden="true"
 						data-toggle="modal" data-target="#avaliacaoModal"
-						data-msg="a cerveja" data:item="${cerveja.marca}"> </i>
+						data-msg="a cerveja" data:item="${cerveja.marca}" data:id="${cerveja.id}"> </i>
 				</span></td>
 			</tr>
 			<tr th:if="${cervejaList.empty}">
@@ -128,6 +128,7 @@
 				<div class="modal-body">
 				<h4 id="nomeCerveja"></h4>
 					<form>
+					<input type="hidden" id="idCerveja">
 						<div class="row">
 							<div class="col-sm-4">
 								<div class="form-group">
@@ -186,11 +187,11 @@
 									<div class="col-sm-12">
 										<label for="conjunto">Conjunto</label> <select
 											class="form-control ratingStar" id="conjuntoAval">
-											<option value="1.5">1</option>
-											<option value="2.5">2</option>
-											<option value="3.5">3</option>
-											<option value="4.5">4</option>
-											<option value="5.5">5</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
 										</select>
 									</div>
 								</div>
