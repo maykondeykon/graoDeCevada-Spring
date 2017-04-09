@@ -1,20 +1,26 @@
 package com.mkdk.graoDeCevada.controller;
 
+import java.io.File;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +41,7 @@ import com.mkdk.graoDeCevada.repository.TipoCervejaRepository;
 import com.mkdk.graoDeCevada.repository.UsuarioReposistory;
 import com.mkdk.graoDeCevada.repository.filter.CervejaFilter;
 import com.mkdk.graoDeCevada.service.AvaliacaoService;
+import com.mkdk.graoDeCevada.service.FileService;
 
 @Controller
 @RequestMapping("/cerveja")
@@ -82,8 +89,13 @@ public class CervejaController {
 	@Autowired
 	private AvaliacaoService avaliacaoService;
 	
+	@Autowired
+	private FileService fileService;
+	
+	@Autowired
+    private ServletContext servletContext;
+	
 	/**
-	 * TODO adicionar foto da cerveja
 	 * @param cerveja
 	 * @return
 	 */
@@ -101,13 +113,13 @@ public class CervejaController {
 		mv.addObject("saborList", repoSabor.findAll());
 		mv.addObject("tipoCervejaList", repoTipoCerveja.findAll());
 		mv.addObject("faixaPrecoList", repoFaixaPreco.findAll());
-
+		
 		return mv;
 
 	}
 
 	@PostMapping("/novo")
-	public ModelAndView salvar(@Valid Cerveja cerveja, BindingResult result, RedirectAttributes attributes) {
+	public ModelAndView salvar(@RequestParam("file") MultipartFile foto, @Validated Cerveja cerveja, BindingResult result, RedirectAttributes attributes) {
 		if (result.hasErrors()) {
 			return novo(cerveja);
 		}
@@ -117,6 +129,11 @@ public class CervejaController {
 			msg = "Cerveja inserida com sucesso!";
 		}else{
 			msg = "Cerveja atualizada com sucesso!";
+		}
+		
+		if ( !foto.isEmpty() ) {
+			String nomeFoto = fileService.uploadFotoCerveja(foto);
+			cerveja.setFoto(nomeFoto);
 		}
 		
 		repoCerveja.save(cerveja);
@@ -144,7 +161,9 @@ public class CervejaController {
 	 */
 	@GetMapping("/pesquisa")
 	public ModelAndView pesquisa(CervejaFilter cervejaFilter) {
+		
 		ModelAndView mv = new ModelAndView("/cerveja/pesquisa");
+		mv.addObject("fileService", fileService);
 		mv.addObject("avaliacaoService", avaliacaoService);
 		mv.addObject("cervejaList",
 				repoCerveja.findByMarcaContainingIgnoreCase(Optional.ofNullable(cervejaFilter.getMarca()).orElse("%")));

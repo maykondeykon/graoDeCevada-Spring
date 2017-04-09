@@ -41,6 +41,7 @@
 	<table class="table table-hover table-bordered table-responsive">
 		<thead>
 			<tr>
+				<th>Foto</th>
 				<th>Marca</th>
 				<th>Categoria</th>
 				<th>Embalagem</th>
@@ -57,6 +58,10 @@
 		</thead>
 		<tbody>
 			<tr th:each="cerveja: ${cervejaList}">
+				<td>
+					<img th:if="${!cerveja.foto.isEmpty() }" class="imgCervejaPesquisa" th:src="@{/uploads/cervejas/{foto}(foto=${cerveja.foto})}" alt="..."/>
+					<img th:if="${cerveja.foto.isEmpty() }" class="imgCervejaPesquisa" th:src="@{/uploads/cervejas/{foto}(foto='padrao.png')}" alt="..."/>
+				</td>
 				<td th:text="${cerveja.marca}"></td>
 				<td th:text="${cerveja.categoria.descricao}"></td>
 				<td th:text="${cerveja.embalagem.descricao}"></td>
@@ -215,7 +220,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn  btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn  btn-default" data-dismiss="modal">Sair</button>
 					<button class="btn  btn-primary btSalvarAvaliacao">Avaliar</button>
 				</div>
 

@@ -42,6 +42,7 @@ public class SiteController {
 
 		return mv;
 	}
+	
 
 	@PostMapping("/contato")
 	public ModelAndView salvar(@Valid Contato contato, BindingResult result, RedirectAttributes attributes) {

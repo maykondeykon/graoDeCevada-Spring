@@ -55,7 +55,9 @@ public class Cerveja {
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	private FaixaPreco faixaPreco;
-
+	
+	private String foto;
+	
 	public Long getId() {
 		return id;
 	}
@@ -144,6 +146,14 @@ public class Cerveja {
 		this.faixaPreco = faixaPreco;
 	}
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -228,4 +238,5 @@ public class Cerveja {
 			return false;
 		return true;
 	}
+	
 }

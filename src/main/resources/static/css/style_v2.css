@@ -182,3 +182,14 @@ footer a:hover, a:focus {
 .actionsContato span {
 	padding: 0.7em;
 }
+
+.imgCervejaPesquisa {
+	max-height: 4em;
+	max-width: 4em;
+}
+
+.imgCervejaEdit {
+	max-height: 18em;
+	max-width: 18em;
+	padding:1em;
+}
