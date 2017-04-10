@@ -84,16 +84,10 @@ public class CervejaController {
 	private UsuarioReposistory repoUsuario;
 	
 	@Autowired
-	private PerfilRepository repoPerfil;
-	
-	@Autowired
 	private AvaliacaoService avaliacaoService;
 	
 	@Autowired
 	private FileService fileService;
-	
-	@Autowired
-    private ServletContext servletContext;
 	
 	/**
 	 * @param cerveja

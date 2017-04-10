@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mkdk.graoDeCevada.model.Cerveja;
 import com.mkdk.graoDeCevada.model.Contato;
+import com.mkdk.graoDeCevada.repository.CervejaRepository;
 import com.mkdk.graoDeCevada.repository.ContatoRepository;
 import com.mkdk.graoDeCevada.repository.FaixaPrecoRepository;
 import com.mkdk.graoDeCevada.repository.filter.CervejaFilter;
@@ -28,6 +29,9 @@ public class SiteController {
 
 	@Autowired
 	private ContatoRepository repoContato;
+	
+	@Autowired
+	private CervejaRepository repoCerveja;
 
 	@GetMapping("/")
 	public ModelAndView index() {
