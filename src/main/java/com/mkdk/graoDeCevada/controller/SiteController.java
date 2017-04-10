@@ -1,5 +1,6 @@
 package com.mkdk.graoDeCevada.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mkdk.graoDeCevada.model.Avaliacao;
 import com.mkdk.graoDeCevada.model.Cerveja;
 import com.mkdk.graoDeCevada.model.Contato;
 import com.mkdk.graoDeCevada.repository.CervejaRepository;
 import com.mkdk.graoDeCevada.repository.ContatoRepository;
 import com.mkdk.graoDeCevada.repository.FaixaPrecoRepository;
 import com.mkdk.graoDeCevada.repository.filter.CervejaFilter;
+import com.mkdk.graoDeCevada.service.AvaliacaoService;
 
 @Controller
 @RequestMapping("/")
@@ -32,6 +35,9 @@ public class SiteController {
 	
 	@Autowired
 	private CervejaRepository repoCerveja;
+	
+	@Autowired
+	private AvaliacaoService avaliacaoService;
 
 	@GetMapping("/")
 	public ModelAndView index() {
@@ -85,7 +91,12 @@ public class SiteController {
 
 	@GetMapping("/ranking")
 	public ModelAndView ranking() {
+		
+		List<Cerveja> ranking = avaliacaoService.getRanking();
+		
 		ModelAndView mv = new ModelAndView("site/ranking");
+		mv.addObject("ranking", ranking);
+		mv.addObject("avaliacaoService", avaliacaoService);
 
 		return mv;
 	}

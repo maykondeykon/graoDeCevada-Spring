@@ -11,127 +11,27 @@
 	
         <h3 class="pageTitle focus"><i class="fa fa-trophy" aria-hidden="true"></i> Ranking</h3>
 
-        <ul class="media-list">
+        <ul class="media-list" th:each="cerveja, index: ${ranking}">
             <li class="media">
                 <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#01</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/01R.jpg}" alt="..."/>
+                    <a th:href="@{/cerveja/{id}(id=${cerveja.id})}">
+                        <span class="rankingNumber" th:text="'#'+${index.count}">#01</span>
+                        <img class="media-object thumbnail figureRanking" th:src="@{/uploads/cervejas/{foto}(foto=${cerveja.foto})}" alt="..."/>
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading">TRIPEL MONTFORT WOOD</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#02</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/02R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">MF STRONG SCOTCH</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#03</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/03R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">MF TRIPEL BARRIL VINHO DO PORTO</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#04</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/04R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading"> BODEBROWN DOUBLE PERIGOSA WOOD</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#05</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/05R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading"> BODEBROWN WEE HEAVY</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#06</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/06R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading"> DOGMA RIZOMA</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#07</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/07R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading"> SEASONS HOLY COW</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#08</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/08R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading"> MD FRUIT BERLINER CABERNET</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#09</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/09R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading"> DOGMA CITRA LOVER</h4>
-                </div>
-            </li>
-
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <span class="rankingNumber">#10</span>
-                        <img class="media-object thumbnail figureRanking" th:src="@{/img/10R.jpg}" alt="..."/>
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading"> SEASONS GREEN COW HARVEST IPA</h4>
+                    <h4 class="media-heading" th:text="${cerveja.marca}"></h4>
+                    <span th:text=" 'Avaliação geral: ' +${avaliacaoService.getAvaliacaoGeral(cerveja)}">&nbsp;</span>
+                    <span data-toggle="tooltip" data-placement="top" title="Avaliar">
+						<i class="fa fa-thumbs-o-up" aria-hidden="true"
+						data-toggle="modal" data-target="#avaliacaoModal"
+						data-msg="a cerveja" data:item="${cerveja.marca}" data:id="${cerveja.id}"> </i>
+				</span>
                 </div>
             </li>
         </ul>
+        
+        <div th:include="layout/fragments/avaliacaoModal"></div>
 	</main>
 
 </body>

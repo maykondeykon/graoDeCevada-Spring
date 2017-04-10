@@ -76,9 +76,10 @@ $(document).on("click", ".btSalvarAvaliacao", function () {
 	
 	console.log(params);
 	
-	$.post( "/cerveja/avalia", params)
+	$.post( "/graodecevada/cerveja/avalia", params)
 	  .done(function( data ) {
 	    $(modalBody).prepend(alertSuccess);
+	    location.reload();
 	  });
 	
 });
